@@ -5,11 +5,14 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+autopep8 = "*"
 
 [packages]
 pdfminer-six = "==20181108"
 chardet = "*"
 tabula-py = "*"
+flask = "==1.1.1"
+flask-restful = "*"
 
 [requires]
 python_version = "3.7"
