@@ -1,0 +1,15 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+pdfminer-six = "==20181108"
+chardet = "*"
+tabula-py = "*"
+
+[requires]
+python_version = "3.7"
