@@ -10,6 +10,7 @@ pylint = "*"
 pdfminer-six = "==20181108"
 chardet = "*"
 tabula-py = "*"
+rows = {extras = ["pdf"],version = "*"}
 
 [requires]
 python_version = "3.7"
