@@ -14,14 +14,10 @@ class TaxCalculator:
     def calculate_balance(asset_financial_operations):   
         buys_balance = TaxCalculator.filter_and_sum(asset_financial_operations)
         sells_balance = TaxCalculator.filter_and_sum(asset_financial_operations, 'V')
-
         total_balance = sells_balance - buys_balance
         print(total_balance)
         return total_balance
 
     def filter_and_sum(asset_financial_operations, search_filter='C'):
-        buys_operations = list(filter(lambda fo: fo.op_type == search_filter, asset_financial_operations))
-        buys_balance = 0.0
-        for buy_operation in buys_operations:
-            buys_balance += buy_operation.total_price()
-        return buys_balance
+        operations = filter(lambda fo: fo.op_type == search_filter, asset_financial_operations)
+        return sum(op.total_price() for op in operations)
