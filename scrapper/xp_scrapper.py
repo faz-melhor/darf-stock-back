@@ -20,7 +20,7 @@ class XPFlavor:
         # 7 - preco
         # print(multiple_tables[0][7])
     def read_test(self): 
-        dados = [['C','AES TIETE E',2000,10.0],['V','AES TIETE E',2000,30.0], ['V','VALE TIETE E',2000,30.0]]
+        dados = [['C','AES TIETE E',2000,10.0],['C','AES TIETE E',2000,30.0], ['V','VALE TIETE E',2000,30.0]]
         return pd.DataFrame(dados, columns = ['0', '1', '2', '3'])
         
 
