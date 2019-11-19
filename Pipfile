@@ -4,13 +4,12 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
+pylint = "==2.4.4"
 
 [packages]
-pdfminer-six = "==20181108"
-chardet = "*"
-tabula-py = "*"
-rows = {extras = ["pdf"],version = "*"}
+chardet = "==3.0.4"
+tabula-py = "==1.4.1"
+rows = {extras = ["pdf"],version = "==0.4.1"}
 
 [requires]
 python_version = "3.7"
