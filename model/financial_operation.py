@@ -28,3 +28,5 @@ class FinancialOperation:
     def __str__(self):
         return "OpType: {} - AssetName: {} Quantity: {} - Price: {}".format(self.__op_type, self.__asset_name, 
                                                                             self.__quantity, self.__price)
+
+    __repr__ = __str__
