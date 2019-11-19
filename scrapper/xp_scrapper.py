@@ -1,10 +1,7 @@
 import pandas as pd
-import sys, os
-sys.path.insert(0,'/home/nathan/Documents/codes/darf/darf-stock-back/model')
-sys.path.insert(0,'/home/nathan/Documents/codes/darf/darf-stock-back/service')
-from financial_operation import FinancialOperation
-from taxes import TaxCalculator
 import tabula
+from model.financial_operation import FinancialOperation
+
 class XPFlavor:
     
     def read_pdf(self,file):
@@ -30,14 +27,3 @@ class XPFlavor:
     def create_financial_op(self, line):
         # return FinancialOperation(line[1], line[3], line[6], line[7])
         return FinancialOperation(line[0],line[1],line[2],line[3])
-
-if __name__ == "__main__":
-    file = 'samples/xp-2.pdf'
-    # print (sys.path)
-    xp = XPFlavor()
-    # data_matrix = xp.read_pdf(file)
-    # xp.read_test()
-    data_matrix =xp.read_test()
-    lines = data_matrix.apply(xp.create_financial_op, axis=1)
-    TaxCalculator.calculate_tax(lines)
-    #print(lines)
