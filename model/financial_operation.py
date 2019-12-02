@@ -24,7 +24,13 @@ class FinancialOperation:
 
     def total_price(self):
         return self.__price * self.__quantity
-    
+
+    def __lt__(self, other):
+        if(self.__asset_name < other.asset_name):
+            return True
+        else:
+            return False
+
     def __str__(self):
         return "OpType: {} - AssetName: {} Quantity: {} - Price: {}".format(self.__op_type, self.__asset_name, 
                                                                             self.__quantity, self.__price)
