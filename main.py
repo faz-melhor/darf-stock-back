@@ -9,5 +9,5 @@ if __name__ == "__main__":
     # xp.read_test()
     data_matrix =xp.read_test()
     lines = data_matrix.apply(xp.create_financial_op, axis=1)
-    TaxCalculator.calculate_tax(lines)
+    print(TaxCalculator.calculate_tax(lines))
     #print(lines)
