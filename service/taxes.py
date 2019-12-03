@@ -6,32 +6,26 @@ class TaxCalculator:
     def calculate_tax(financial_operations):
         financial_operations.sort_values(inplace=True, kind='mergesort')
         grouped = [list(g) for k, g in groupby(financial_operations, lambda fo: fo.asset_name)]
-        print(grouped)
-        x = [TaxCalculator.calculate_balance(fo) for fo in grouped]
+        # print(grouped)
+        x = [TaxCalculator.calculate_p_l(fo) for fo in grouped]
+        print (x)
         return grouped
 
+    # calculate profit and loss on a set of paper, operated in a range of time
     @staticmethod
-    def calculate_balance(asset_financial_operations):
-
-        # buying_summary = TaxCalculator.filter_and_sum(asset_financial_operations)
-        # average_buying_price = buying_summary["price"]/buying_summary["total_quantity"]
-        # selling_summary = TaxCalculator.filter_and_sum(asset_financial_operations, 'V')
-        # total_balance = sells_balance - buys_balance
-        for paper in asset_financial_operations:
-            average_price = dict()
-            profit_loss = []
-            print(type(paper))
-        #     for operation in paper:
-        #         if operation.op_type == "C":
-        #             average_price["quantity"] += operation.quantity
-        #             average_price["total_price"] += operation.total_price
-        #             average_price["average"] = average_price["total_price"]/average_price["quantity"]
-        #         elif operation.op_type == "V":
-        #             profit_loss.append(operation.total_price - (average_price["average"] * operation.quantity))
-        #             average_price["quantity"] -= operation.quantity
-        #             average_price["total_price"] = average_price["quantity"] * average_price["average"]
-        # print(profit_loss)
-        # return profit_loss
+    def calculate_p_l(paper):
+        paper_average = {'quantity':0, 'total_price':0,'average':0}
+        profit_loss = []
+        for operation in paper:
+            if operation.op_type == "C":
+                paper_average["quantity"] += operation.quantity
+                paper_average["total_price"] += operation.total_price()
+                paper_average["average"] = paper_average["total_price"]/paper_average["quantity"]
+            elif operation.op_type == "V":
+                profit_loss.append(operation.total_price() - (paper_average["average"] * operation.quantity))
+                paper_average["quantity"] -= operation.quantity
+                paper_average["total_price"] = paper_average["quantity"] * paper_average["average"]
+        return profit_loss
 
     @staticmethod
     def filter_and_sum(asset_financial_operations, search_filter='C'):
