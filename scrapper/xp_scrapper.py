@@ -21,15 +21,18 @@ class XPFlavor:
         # 6 - Quantidade
         # 7 - preco
         # print(multiple_tables[0][7])
-    def read_test(self): 
-        dados = [['C','AES TIETE E',200,10.0],
-                 ['C','ACAO DO DARIO',10,20.0],
-                 ['V','AES TIETE E',180,13.0],
-                 ['C','AES TIETE E',150,12.0],
-                 ['C','AES TIETE E',100,13.0],
-                 ['V','AES TIETE E',200,10.0],
-                 ['C','AES TIETE E',130,10.0],
-                 ['V','AES TIETE E',200,10.0]]
+    def read_test(self):
+        dados = [['C','AES TIETE E',2000,10.0],
+                 ['V','AES TIETE E',2000,20.0]] 
+        # dados = [['C','AES TIETE E',2000,10.0],
+        #          ['C','ACAO DO DARIO',10,20.0],
+        #          ['V','AES TIETE E',1800,13.0],
+        #          ['C','AES TIETE E',150,12.0],
+        #          ['C','AES TIETE E',100,13.0],
+        #          ['V','AES TIETE E',200,10.0],
+        #          ['C','AES TIETE E',130,10.0],
+        #          ['V','AES TIETE E',200,10.0],
+        #          ['V','ACAO DO DARIO',10,22.0]]
         return pd.DataFrame(dados, columns = ['0', '1', '2', '3'])
         
 
