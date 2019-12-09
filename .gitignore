@@ -107,5 +107,5 @@ venv.bak/
 /samples
 
 # IDE
-
+.idea/
 /.vscode/
