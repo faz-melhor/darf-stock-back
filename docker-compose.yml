@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+  api:
+    image: darf-stock-api:latest
+    ports:
+      - 5000:5000
