@@ -10,13 +10,22 @@ class XPFlavor:
     def read_pdf(file):
         filename = file
         multiple_tables = tabula.read_pdf(filename, 
-                                          stream=True, 
+                                          stream=True,
+                                          lattice=True, 
                                           guess=False, 
                                           multiple_tables=True, 
                                           area=(30,1,50,100), 
-                                          relative_area=True,pages='all')
-        print(multiple_tables)
-        return multiple_tables[0]
+                                          relative_area=True, pages='all')
+        tabula.convert_into(filename, 
+                                          stream=True,
+                                          lattice=False, 
+                                          guess=True, 
+                                          multiple_tables=True, 
+                                          area=(29,1,50,100), 
+                                          relative_area=True, pages='all',
+                                          output_path="teste.csv",
+                                          output_format="csv")
+        return multiple_tables
         # 1 - Op_type
         # 3 - Name
         # 6 - Quantidade

@@ -1,15 +1,15 @@
-from scrapper.xp_scrapper import XPFlavor
-
+from scrapper.cei_scrapper import CEIFlavor
+from scrapper.operations_sheet_scrapper import OperationsSheetFlavor
 from service.taxes import TaxCalculator
 
 if __name__ == "__main__":
     
-    file = 'samples/xp.pdf'
-    # print (sys.path)
-    xp = XPFlavor()
-    # data_matrix = xp.read_pdf(file)
-    # xp.read_test()
-    data_matrix = xp.read_pdf(file)
-    lines = data_matrix.apply(xp.create_financial_op, axis=1)
-    print(TaxCalculator.calculate_tax(lines))
-    #print(lines)
+    file = 'samples/operacoes.xls'
+    
+    # cei = CEIFlavor()
+    operations_sheet = OperationsSheetFlavor()
+    df = operations_sheet.read_xls(file)
+    financial_operations = df.apply(operations_sheet.create_financial_op, axis=1)
+    print(financial_operations)
+    total_tax = TaxCalculator.calculate_tax(financial_operations)
+    print(total_tax)
