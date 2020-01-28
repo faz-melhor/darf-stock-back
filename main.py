@@ -10,6 +10,5 @@ if __name__ == "__main__":
     operations_sheet = OperationsSheetFlavor()
     df = operations_sheet.read_xls(file)
     financial_operations = df.apply(operations_sheet.create_financial_op, axis=1)
-    print(financial_operations)
     total_tax = TaxCalculator.calculate_tax(financial_operations)
     print(total_tax)
