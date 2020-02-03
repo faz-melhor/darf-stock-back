@@ -4,7 +4,7 @@ from service.taxes import TaxCalculator
 
 if __name__ == "__main__":
     
-    file = 'samples/operacoes.xls'
+    file = 'samples2/operacoes.xls'
     
     # cei = CEIFlavor()
     operations_sheet = OperationsSheetFlavor()
