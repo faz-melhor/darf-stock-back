@@ -24,7 +24,6 @@ class TaxCalculator:
         profit_loss = [list(g) for k, g in groupby(sort, lambda p_l: p_l['date'].year * 100 + p_l['date'].month)]
         # print(profit_loss)
 
-
         # Calculate the amount of profit loss and sell by month
         by_month = []
 
@@ -33,16 +32,22 @@ class TaxCalculator:
             total_sell = sum(sell['sell'] for sell in pl_per_month)
             by_month.append({'total': total_p_l, 'date': pl_per_month[0]['date'], 'sell': total_sell})
         
-        print(by_month)
-
-        # if (total_sell >= 20001):
-        #     return total_p_l * 0.15
-        # else:
-        #     return 0
+        # Mostrar resumo das operacoes no mes
+        # print(by_month)
+        # [{'total': 0, 'date': datetime.datetime(2019, 7, 31, 0, 0), 'sell': 0}, {'total': 0, 'date': datetime.datetime(2019, 8, 15, 0, 0), 'sell': 0}, {'total': 0, 'date': datetime.datetime(2019, 9, 12, 0, 0), 'sell': 0}, {'total': 80788.97169811321, 'date': datetime.datetime(2020, 1, 18, 0, 0), 'sell': 202000.0}]
+        # mostrar mes mapeado em cada objeto
+        # print(by_month[0]["date"].strftime("%B"))
+        for i in range(0,len(by_month)):
+            if (by_month[i]["sell"] >= 20001):
+                by_month[i]["tax"] = by_month[i]["total"] * 0.15
+            else:
+                by_month[i]["tax"] = 0
         
         # print(str(total_p_l))
         # print(total_sell)
         # print(str(profit_loss))
+        print (by_month)
+        return by_month
 
     # calculate profit and loss on a set of paper, operated in a range of time
     @staticmethod
@@ -51,17 +56,20 @@ class TaxCalculator:
         reference_month = paper[0].date
         profit_loss = [{'p_l':0,'sell':0, 'date': reference_month}]
         month_index = 0
-        print(reference_month)
+        # print operation by paper
+        # print(reference_month)
         for operation in paper:
             if reference_month.year != operation.date.year or operation.date.month != reference_month.month:
                 reference_month = operation.date
             # calculate average on every buy
             if operation.op_type == "C":
+                
                 # sum all quantity, total_price and calculate the average from every operation of each paper
                 paper_average["quantity"] += operation.quantity
                 paper_average["total_price"] += operation.total_price()
                 paper_average["average"] = paper_average["total_price"]/paper_average["quantity"]
             elif operation.op_type == "V":
+
                 # sum all profit_loss, sell and subtract the quantity
                 if profit_loss[month_index]['date'] != reference_month:
                     month_index += 1
