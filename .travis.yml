@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.7"
+
+services:
+  - docker
+
+after_success:
+  - bash deploy.sh
+# deploy:
+#   provider: script
+#   script: bash deploy.sh
+#   on:
+#     branch: master
