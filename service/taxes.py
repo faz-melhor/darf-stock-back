@@ -30,14 +30,17 @@ class TaxCalculator:
         for pl_per_month in profit_loss:
             total_p_l = sum(pl['p_l'] for pl in pl_per_month)
             total_sell = sum(sell['sell'] for sell in pl_per_month)
-            by_month.append({'total': total_p_l, 'date': pl_per_month[0]['date'], 'sell': total_sell})
+            by_month.append({'total': total_p_l, 'monthYear': str(pl_per_month[0]['date'].month) +"/"+ str(pl_per_month[0]['date'].year), 'sell': total_sell})
         
         # Mostrar resumo das operacoes no mes
         # print(by_month)
         # [{'total': 0, 'date': datetime.datetime(2019, 7, 31, 0, 0), 'sell': 0}, {'total': 0, 'date': datetime.datetime(2019, 8, 15, 0, 0), 'sell': 0}, {'total': 0, 'date': datetime.datetime(2019, 9, 12, 0, 0), 'sell': 0}, {'total': 80788.97169811321, 'date': datetime.datetime(2020, 1, 18, 0, 0), 'sell': 202000.0}]
         # mostrar mes mapeado em cada objeto
         # print(by_month[0]["date"].strftime("%B"))
+        total_sum = 0
         for i in range(0,len(by_month)):
+            total_sum += by_month[i]["total"]
+            by_month[i]["total_sum"] = total_sum
             if (by_month[i]["sell"] >= 20001):
                 by_month[i]["tax"] = by_month[i]["total"] * 0.15
             else:
