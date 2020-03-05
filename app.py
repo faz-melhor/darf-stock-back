@@ -19,6 +19,12 @@ ALLOWED_EXTENSIONS = set(['pdf'])
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+@app.route('/hello', methods=['GET'])
+@cross_origin()
+def hello_world():
+	return jsonify(hello='world')
+
 @app.route('/upload', methods=['POST'])
 @cross_origin()
 def upload_file():
