@@ -107,11 +107,6 @@ venv.bak/
 /samples
 
 # IDE
-<<<<<<< HEAD
-.idea/
-/.vscode/
-=======
 
 /.vscode/
 /.idea/
->>>>>>> b68a2023588a02b476dacff4922c1855848983af
