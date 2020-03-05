@@ -1,14 +1,19 @@
 class FinancialOperation:
     
-    def __init__(self, op_type, asset_name, quantity, price):
+    def __init__(self, op_type, asset_name, quantity, price, date):
         self.__op_type = op_type
         self.__asset_name = asset_name
         self.__quantity = quantity
         self.__price = price
+        self.__date = date
 
     @property
     def op_type(self):  
         return self.__op_type
+    
+    @property
+    def date(self):
+        return self.__date
 
     @property
     def asset_name(self):  
