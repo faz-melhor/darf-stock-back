@@ -49,10 +49,6 @@ class TaxCalculator:
             
             by_month[i]["tax"] = TaxCalculator.calculate_tax(by_month[i]["sell"], by_month[i]["total"], total_sum)
         
-        # print(str(total_p_l))
-        # print(total_sell)
-        # print(str(profit_loss))
-        # print (by_month)
         return by_month
 
     # calculate profit and loss on a set of paper, operated in a range of time
@@ -62,20 +58,19 @@ class TaxCalculator:
         reference_month = paper[0].date
         profit_loss = [{'p_l':0,'sell':0, 'date': reference_month}]
         month_index = 0
-        # print operation by paper
-        # print(reference_month)
+
         for operation in paper:
+
             if reference_month.year != operation.date.year or operation.date.month != reference_month.month:
                 reference_month = operation.date
+
             # calculate average on every buy
             if operation.op_type == "C":
-                
                 # sum all quantity, total_price and calculate the average from every operation of each paper
                 paper_average["quantity"] += operation.quantity
                 paper_average["total_price"] += operation.total_price()
                 paper_average["average"] = paper_average["total_price"]/paper_average["quantity"]
             elif operation.op_type == "V":
-
                 # sum all profit_loss, sell and subtract the quantity
                 if profit_loss[month_index]['date'] != reference_month:
                     month_index += 1
@@ -86,18 +81,14 @@ class TaxCalculator:
                 profit_loss[month_index]['sell'] += operation.total_price()
                 paper_average["quantity"] -= operation.quantity
                 paper_average["total_price"] = paper_average["quantity"] * paper_average["average"]
-        print(paper_average)
+
+        # print(paper_average)
         return profit_loss
 
-    @staticmethod
-    def filter_and_sum(asset_financial_operations, search_filter='C'):
-        operations = filter(lambda fo: fo.op_type == search_filter, asset_financial_operations)
-        summary = {"price": sum(op.total_price() for op in operations),
-                   "total_quantity": sum(op.quantity for op in operations)}
-        return summary
-
+    # This methos is supposed to calculate the tax on the sum of profit_loss
     @staticmethod
     def calculate_tax(sell, profit_loss, profit_loss_sum):
+
         if (sell >= 20001 and profit_loss > 0):
             return profit_loss_sum * 0.15
         return 0
