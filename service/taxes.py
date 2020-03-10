@@ -5,7 +5,7 @@ from datetime import datetime
 
 class TaxCalculator:
     @staticmethod
-    def calculate_tax(financial_operations):
+    def process_financial_operations(financial_operations):
         financial_operations.sort_values(inplace=True, kind='mergesort')
         grouped = [list(g) for k, g in groupby(financial_operations, lambda paper: paper.asset_name)]
         
@@ -39,17 +39,20 @@ class TaxCalculator:
         # print(by_month[0]["date"].strftime("%B"))
         total_sum = 0
         for i in range(0,len(by_month)):
-            total_sum += by_month[i]["total"]
+            if total_sum > 0:
+                total_sum = 0
+            
+            if (by_month[i]["total"] < 0 or by_month[i]["sell"] >= 20001):
+                total_sum += by_month[i]["total"]
+
             by_month[i]["total_sum"] = total_sum
-            if (by_month[i]["sell"] >= 20001):
-                by_month[i]["tax"] = by_month[i]["total"] * 0.15
-            else:
-                by_month[i]["tax"] = 0
+            
+            by_month[i]["tax"] = TaxCalculator.calculate_tax(by_month[i]["sell"], by_month[i]["total"], total_sum)
         
         # print(str(total_p_l))
         # print(total_sell)
         # print(str(profit_loss))
-        print (by_month)
+        # print (by_month)
         return by_month
 
     # calculate profit and loss on a set of paper, operated in a range of time
@@ -92,3 +95,9 @@ class TaxCalculator:
         summary = {"price": sum(op.total_price() for op in operations),
                    "total_quantity": sum(op.quantity for op in operations)}
         return summary
+
+    @staticmethod
+    def calculate_tax(sell, profit_loss, profit_loss_sum):
+        if (sell >= 20001 and profit_loss > 0):
+            return profit_loss_sum * 0.15
+        return 0

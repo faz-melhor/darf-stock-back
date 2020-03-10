@@ -10,7 +10,7 @@ if __name__ == "__main__":
     operations_sheet = OperationsSheetFlavor()
     df = operations_sheet.read_xls(file)
     financial_operations = df.apply(operations_sheet.create_financial_op, axis=1)
-    total_tax = TaxCalculator.calculate_tax(financial_operations)
+    total_tax = TaxCalculator.process_financial_operations(financial_operations)
 
     for month in total_tax:
         print(f'No mês: {month["date"].strftime("%B")} houveram {month["sell"]}r$ em vendas. E é necessário pagar {month["tax"]}R$ em impostos')
