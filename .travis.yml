@@ -11,7 +11,7 @@ services:
   - docker
 
 script:
-  - echo "skipping tests"  
+  - pytest 
 
 after_success:
   - sh deploy.sh
