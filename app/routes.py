@@ -31,7 +31,7 @@ def upload_file():
 		operations_sheet = OperationsSheetFlavor()
 		df = operations_sheet.read_xls(file)
 		financial_operations = df.apply(operations_sheet.create_financial_op, axis=1)
-		total_tax = TaxCalculator.calculate_tax(financial_operations)
+		total_tax = TaxCalculator.process_financial_operations(financial_operations)
 		resp = jsonify(total_tax)
 		print (resp)
 		success = True
